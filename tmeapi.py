@@ -1,11 +1,12 @@
 import urllib.request
+import urllib.parse
 import collections
 import base64
 import hmac
 import hashlib
 
 class Client():
-    def __init__(self, api_token, api_secret, api_host = 'https://api.tme.eu'):
+    def __init__(self, api_token, api_secret, api_host='https://api.tme.eu'):
         self.__api_token = api_token
         self.__api_secret = api_secret.encode()
         self.__api_host = api_host
@@ -20,7 +21,7 @@ class Client():
         hmac_value = hmac.new(self.__api_secret, self.__get_signature_base(url, params), hashlib.sha1).digest()
         return base64.encodebytes(hmac_value).rstrip()
 
-    def request(self, endpoint, params, format = 'json'):
+    def request(self, endpoint, params, format='json'):
         url = self.__api_host + endpoint + '.' + format
         params['Token'] = self.__api_token
         params['ApiSignature'] = self.__calculate_signature(url, params)

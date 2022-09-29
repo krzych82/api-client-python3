@@ -5,6 +5,7 @@ Simple request:
 ```
 import tmeapi
 import urllib.error
+import urllib.request
 
 token = '<YOUR_TOKEN>'
 secret = '<YOUR_SECRET>'
