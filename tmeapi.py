@@ -13,9 +13,8 @@ class Client():
 
     def __get_signature_base(self, url, params):
         params = collections.OrderedDict(sorted(params.items()))
-        encoded_params = urllib.parse.urlencode(params)
+        encoded_params = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
         signature_base = 'POST' + '&' + urllib.parse.quote(url, '') + '&' + urllib.parse.quote(encoded_params, '')
-        signature_base = signature_base.replace("%2B", "%2520")
         return signature_base.encode()
 
     def __calculate_signature(self, url, params):
