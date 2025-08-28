@@ -17,7 +17,7 @@ class Client():
         signature_base = 'POST' + '&' + urllib.parse.quote(url, '') + '&' + urllib.parse.quote(encoded_params, '')
         return signature_base.encode()
 
-    def __calculate_signature(self, url, params):
+    def calculate_signature(self, url, params):
         hmac_value = hmac.new(self.__api_secret, self.__get_signature_base(url, params), hashlib.sha1).digest()
         return base64.encodebytes(hmac_value).rstrip()
 
